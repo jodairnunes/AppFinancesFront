@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: teal;
+    --secondary-color: white;
+    --text-color: #555555;
+    --bg-color: #EEEEEE;
+    --bg-input: #e2e5e9;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
