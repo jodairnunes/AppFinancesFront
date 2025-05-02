@@ -1,1 +1,49 @@
-<p>form-register works!</p>
+
+<form [formGroup]="formregister">
+    <h2>Sign in and start today!</h2>
+    <div class="input-group">
+        <label for="name">Name</label>
+        <div class="input-line">
+            <input type="text" formControlName="name" name="name" id="name" placeholder="Arthur Nunes">
+            <div class="img">
+                <img src="/img/email-icon.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="email">Email</label>
+        <div class="input-line">
+            <input type="text" formControlName="email" name="email" id="email" placeholder="arthur@gmail.com">
+            <div class="img">
+                <img src="/img/email-icon.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password</label>
+        <div class="input-line">
+            <input type="password" formArrayName="password"  name="password" id="password" placeholder=" ************">
+            <div class="img">
+                <img src="/img/password-icon.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="repeatPassword">Repeat Password</label>
+        <div class="input-line">
+            <input type="password" formControlName="password" name="repeatPassword" id="repeatPassword" placeholder=" ************">
+            <div class="img">
+                <img src="/img/password-icon.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <p class="forgot">Forgot Password?</p>
+
+    <div class="button-group">
+        <button class="btn-register" type="submit">Register</button>
+    </div>
+</form>
