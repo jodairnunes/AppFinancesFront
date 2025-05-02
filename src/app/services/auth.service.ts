@@ -17,12 +17,12 @@ export interface RegisterResponse{
 })
 export class AuthService {
 
-  urlApiLogin = 'http://localhost:8080/auth/login'
+  urlApiAuth = 'http://localhost:8080/auth/'
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string){
-   return this.http.post<LoginResponse>(this.urlApiLogin, {email, password}).pipe(
+   return this.http.post<LoginResponse>(this.urlApiAuth + 'login', {email, password}).pipe(
       tap((resp) => {
         sessionStorage.setItem('token', resp.token);
       })
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   register(name:string, email: string, password: string) {
-    this.http.post<RegisterResponse>('/register', {name, email, password}).pipe(
+    return this.http.post<RegisterResponse>(this.urlApiAuth + 'register', {name, email, password}).pipe(
       tap((resp) => {
         sessionStorage.setItem('email', resp.email);
       })
