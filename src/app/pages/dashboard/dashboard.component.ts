@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  constructor(private router: Router, private toastrService: ToastrService) {}
+
+  logout() {
+    sessionStorage.removeItem('token');
+    this.toastrService.warning('You Logout Dashboard!!!');
+    this.router.navigateByUrl('login');
+  }
 }
