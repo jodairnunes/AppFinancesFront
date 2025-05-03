@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-login',
@@ -17,7 +18,7 @@ import { AuthService } from '../../services/auth.service';
 export class FormLoginComponent {
   formLogin!: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private toastrService: ToastrService) {
     this.formLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -28,14 +29,18 @@ export class FormLoginComponent {
   }
 
   login() {
+    if(this.formLogin.invalid){
+      this.toastrService.error('Invalid data!!!');
+      return;
+    }
     this.authService
       .login(this.formLogin.value.email, this.formLogin.value.password)
       .subscribe({
-        next: (res) => {
-          console.log('Login successful:', res.token);
+        next: () => {
+          this.toastrService.success('Login successful!!!');
           this.router.navigateByUrl('dashboard');
         },
-        error: (err) => console.error('Erro:', err),
+        error: () => this.toastrService.error('Credentials invalid!!!')
       });
   }
 }

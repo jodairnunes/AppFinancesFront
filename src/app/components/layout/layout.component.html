@@ -15,7 +15,7 @@
                 <app-form-login></app-form-login>
             }
             @if (showFormRegister) {
-                <app-form-register></app-form-register>
+                <app-form-register (updateShowForm)="updateShowForm()"></app-form-register>
             }
 
             <div class="button-group">

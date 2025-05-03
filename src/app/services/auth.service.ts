@@ -32,7 +32,7 @@ export class AuthService {
   register(name:string, email: string, password: string) {
     return this.http.post<RegisterResponse>(this.urlApiAuth + 'register', {name, email, password}).pipe(
       tap((resp) => {
-        sessionStorage.setItem('email', resp.email);
+        sessionStorage.setItem('name', resp.name);
       })
     )
   }

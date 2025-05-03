@@ -32,4 +32,10 @@ export class LayoutComponent implements OnInit{
     this.showFormRegister = !this.showFormRegister;
     this.setTitleBtn();
   }
+
+  updateShowForm() {
+    this.showFormLogin = !this.showFormLogin;
+    this.showFormRegister = !this.showFormRegister;
+    this.setTitleBtn();
+  }
 }
