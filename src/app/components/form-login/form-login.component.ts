@@ -38,7 +38,7 @@ export class FormLoginComponent {
       .subscribe({
         next: () => {
           this.toastrService.success('Login successful!!!');
-          this.router.navigateByUrl('dashboard');
+          this.router.navigateByUrl('panel-admin');
         },
         error: () => this.toastrService.error('Credentials invalid!!!')
       });
