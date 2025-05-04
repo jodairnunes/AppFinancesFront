@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-panel-admin',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './panel-admin.component.html',
   styleUrl: './panel-admin.component.scss'
 })

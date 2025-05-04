@@ -1,6 +1,6 @@
 <div class="container">
     <div class="sidebar">
-        <div class="main">
+        <div class="sidebar-main">
             <div class="logo">
                 <img src="/img/logo.svg" alt="">
                 <h1>Finances</h1>
@@ -28,5 +28,9 @@
             </div>
         </div>
         <button class="logout" (click)="logout()"><i class='bx bx-log-out' ></i>Logout</button>
+    </div>
+    
+    <div class="main">
+        <router-outlet></router-outlet>
     </div>
 </div>

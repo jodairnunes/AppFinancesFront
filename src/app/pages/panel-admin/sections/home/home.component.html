@@ -1,1 +1,154 @@
-<p>home works!</p>
+<!-- Control of Finances -->
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <h1>Controle de Finanças</h1>
+      </div>
+    </div>
+  
+    <!-- Main -->
+    <div class="main">
+      <!-- Resume -->
+      <div class="main-resume">
+        <!-- Card In -->
+        <div class="main-resume-card">
+          <div class="card-header">
+            <p>Entradas</p>
+            <i class="fa-solid fa-circle-arrow-up"></i>
+          </div>
+          <p class="total">{{ entrada | currency : "BRL" }}</p>
+        </div>
+        <!-- Card Out -->
+        <div class="main-resume-card">
+          <div class="card-header">
+            <p>Saídas</p>
+            <i class="fa-solid fa-circle-arrow-down"></i>
+          </div>
+          <p class="total">{{ saida | currency : "BRL" }}</p>
+        </div>
+        <!-- Card Value Total-->
+        <div class="main-resume-card">
+          <div class="card-header">
+            <p>Saldo</p>
+            <i class="fa-solid fa-brazilian-real-sign"></i>
+          </div>
+          <p
+            class="total"
+            [ngClass]="{ negativo: total < 0, positivo: total >= 0 }"
+          >
+            {{ total | currency : "BRL" }}
+          </p>
+        </div>
+      </div>
+  
+      <!-- Form -->
+      <form class="form" #formRef="ngForm">
+        <!-- Input Description -->
+        <div class="input-content">
+          <label for="descricao">Descrição</label>
+          <input
+            type="text"
+            id="descricao"
+            name="descricao"
+            [(ngModel)]="descricao"
+            required
+          />
+        </div>
+  
+        <!-- Input Value -->
+        <div class="input-content">
+          <label for="valor">Valor</label>
+          <input
+            type="number"
+            id="valor"
+            name="valor"
+            [(ngModel)]="valor"
+            required
+          />
+        </div>
+  
+        <!-- Inputs Radio -->
+        <div class="input-content">
+          <div class="radio-group">
+            <!-- Radio In -->
+            <div class="input">
+              <input
+                type="radio"
+                id="entrada"
+                name="tipo"
+                [(ngModel)]="tipo"
+                value="entrada"
+              />
+              <label for="entrada">Entrada</label>
+            </div>
+            <!-- Radio Out -->
+            <div class="input">
+              <input
+                type="radio"
+                id="saida"
+                name="tipo"
+                [(ngModel)]="tipo"
+                value="saida"
+              />
+              <label for="saida">Saída</label>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Button Add -->
+        @if (!showBtnAtualizar) {
+        <button (click)="adicionar()">Adicionar</button>
+        } @if (showBtnAtualizar) {
+          <div class="update">
+              <button class="edit" (click)="atualizarLancamento()">Atualizar</button>
+              <button class="cancel" (click)="cancelarEdit()">Cancelar</button>
+          </div>
+        }
+      </form>
+  
+      <!-- Table List-->
+      <table class="table" *ngIf="lancamentos.length > 0">
+        <!-- Table Header -->
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+          <tr *ngFor="let item of lancamentos; let i = index">
+            <td>{{ item.descricao }}</td>
+            <td class="value">R$ {{ item.valor | number : "1.2-2" }}</td>
+            <td>
+              <i
+                [ngClass]="{
+                  'fa-solid': true,
+                  'fa-circle-arrow-up': item.tipo === 'entrada',
+                  'fa-circle-arrow-down': item.tipo === 'saida',
+                  entrada: item.tipo === 'entrada',
+                  saida: item.tipo === 'saida'
+                }"
+              ></i>
+            </td>
+            <td>
+              <i
+                class="fa-solid fa-trash"
+                (click)="remover(item.id)"
+                style="cursor: pointer"
+              ></i>
+              <i
+                class="fa-solid fa-edit"
+                (click)="edit(item)"
+                style="cursor: pointer"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
